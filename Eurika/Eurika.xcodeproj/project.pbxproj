@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A869A291643408800D0CCF3 /* CN1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A869A281643408800D0CCF3 /* CN1ViewController.m */; };
 		CAC21AC316433C2F0025FD3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC21AC216433C2F0025FD3E /* UIKit.framework */; };
 		CAC21AC516433C2F0025FD3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC21AC416433C2F0025FD3E /* Foundation.framework */; };
 		CAC21AC716433C2F0025FD3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC21AC616433C2F0025FD3E /* CoreGraphics.framework */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A869A271643408800D0CCF3 /* CN1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CN1ViewController.h; sourceTree = "<group>"; };
+		4A869A281643408800D0CCF3 /* CN1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CN1ViewController.m; sourceTree = "<group>"; };
 		CAC21ABE16433C2F0025FD3E /* Eurika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eurika.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC21AC216433C2F0025FD3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CAC21AC416433C2F0025FD3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,6 +92,8 @@
 				CAC21ADB16433C2F0025FD3E /* CNViewController.m */,
 				CAC21ADD16433C300025FD3E /* CNViewController.xib */,
 				CAC21AC916433C2F0025FD3E /* Supporting Files */,
+				4A869A271643408800D0CCF3 /* CN1ViewController.h */,
+				4A869A281643408800D0CCF3 /* CN1ViewController.m */,
 			);
 			path = Eurika;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				CAC21ACF16433C2F0025FD3E /* main.m in Sources */,
 				CAC21AD316433C2F0025FD3E /* CNAppDelegate.m in Sources */,
 				CAC21ADC16433C2F0025FD3E /* CNViewController.m in Sources */,
+				4A869A291643408800D0CCF3 /* CN1ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +299,7 @@
 				CAC21AE416433C300025FD3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
