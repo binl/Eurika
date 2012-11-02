@@ -7,6 +7,7 @@
 //
 
 #import "CNAppDelegate.h"
+#import "FoursquareWebLogin.h"
 
 @implementation CNAppDelegate
 
@@ -16,12 +17,65 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.viewController = [[UIViewController alloc]init];
+	self.viewController.view.frame =CGRectMake(0, 0, 320, 480);
+	self.viewController.view.backgroundColor = [UIColor whiteColor];
+    [self.window addSubview:self.viewController.view];
+	[self.viewController viewWillAppear:YES];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    //	[Foursquare2 removeAccessToken];
+	if ([Foursquare2 isNeedToAuthorize]) {
+		[self authorizeWithViewController:self.viewController
+                                 Callback:^(BOOL success,id result){
+                                     if (success) {
+                                         [Foursquare2  getDetailForUser:@"self"
+                                                               callback:^(BOOL success, id result){
+                                                                   if (success) {
+                                                                       [self test_method];
+                                                                   }
+                                                               }];
+                                     }
+                                 }];
+	}else {
+		
+		[Foursquare2  getDetailForUser:@"self"
+							  callback:^(BOOL success, id result){
+								  if (success) {
+									  [self test_method];
+								  }
+							  }];
+	}
+	return YES;
 }
+
+-(void)test_method{
+    NSLog(@"test");
+}
+
+Foursquare2Callback authorizeCallbackDelegate;
+-(void)authorizeWithViewController:(UIViewController*)controller
+						  Callback:(Foursquare2Callback)callback{
+	authorizeCallbackDelegate = [callback copy];
+	NSString *url = [NSString stringWithFormat:@"https://foursquare.com/oauth2/authenticate?display=touch&client_id=%@&response_type=code&redirect_uri=%@",OAUTH_KEY,REDIRECT_URL];
+	FoursquareWebLogin *loginCon = [[FoursquareWebLogin alloc] initWithUrl:url];
+	loginCon.delegate = self;
+	UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:loginCon];
+	
+	[controller presentViewController:navCon animated:YES completion:nil];
+}
+
+-(void)setCode:(NSString*)code{
+	[Foursquare2 getAccessTokenForCode:code callback:^(BOOL success,id result){
+		if (success) {
+			[Foursquare2 setBaseURL:[NSURL URLWithString:@"https://api.foursquare.com/v2/"]];
+			[Foursquare2 setAccessToken:[result objectForKey:@"access_token"]];
+			authorizeCallbackDelegate(YES,result);
+		}
+	}];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
